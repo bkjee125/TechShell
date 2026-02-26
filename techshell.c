@@ -123,7 +123,13 @@ struct ShellCommand parseInput(char* input){
                 } else {
                     strcpy(shell_command.inputFile, token); // copies the token into the input file string
                 }
-            }
+            } else { 
+				/* returns an error if the "<" or input redirect token was used incorrectly. 
+				I don't exactly how to output the exact error message when making this mistake. */
+				fprintf(stderr, "Error: Incorrect usage of input redirect\n");
+				shell_command.command = NULL;
+				return shell_command;
+			}
         } else if (strcmp(token, ">") == 0){
             shell_command.outputRedirect = 1; /* set to one for true to say output redirect is being used 
             and used in the executeCommand function.*/
@@ -137,7 +143,13 @@ struct ShellCommand parseInput(char* input){
                 } else {
                     strcpy(shell_command.outputFile, token); // copies the token into the output file string
                 }
-            }
+            } else {
+				/* returns an error if the ">" or output redirect token was used incorrectly. 
+				I don't exactly how to output the exact error message when making this mistake. */
+				fprintf(stderr, "Error: Incorrect usage of output redirect\n");
+				shell_command.command = NULL;
+				return shell_command;
+			}
         } else {
             shell_command.args[shell_command.argNum++] = token; /* fills the next empty space in the argument array
             with the next token by entering the argument array at the next available stop using argNum++*/
@@ -217,7 +229,7 @@ void executeCommand(struct ShellCommand shell_command){
 
         // output redirect
         if (shell_command.outputRedirect == 1) {
-            int fd = open(shell_command.outputFile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+            int fd = open(shell_command.outputFile, O_WRONLY | O_CREAT | O_TRUNC, 0644); // creates a file decriptor to write, create, or truncate the output file
 
             if (fd < 0) {
                 fprintf(stderr, "Error %d (%s)\n", errno, strerror(errno));
@@ -268,4 +280,5 @@ int main() // MAIN
 
 	exit(0);
 }
+
 
