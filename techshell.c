@@ -187,8 +187,13 @@ void executeCommand(struct ShellCommand shell_command){
 
     // checks if the command is "cd" and if so runs cd correctly
     if (strcmp(shell_command.command, "cd") == 0){ 
+		/* if else statement that checks if the standard input or output redirection commands were used, and if so gives an error because that is not allowed.*/
+		if (shell_command.inputRedirect == 1 || shell_command.outputRedirect == 1) {
+        	fprintf(stderr, "Error: redirection not allowed with cd\n");
+        	return;
+    	}
         /* if else statement that checks if no other token is passed in after "cd"; and if so, the user goes to 
-        the home directory. If not, it checks if the chdir function worked properly and returns and error if not*/
+        the home directory. If not, it checks if the chdir function worked properly and returns an error if not*/
         if (shell_command.args[1] == NULL) { 
             char* homeDirectory = getenv("HOME"); /* used to get the "HOME" environment variable which defines the
             the user's home directory. */ 
@@ -282,6 +287,7 @@ int main() // MAIN
 
 	exit(0);
 }
+
 
 
 
