@@ -17,6 +17,7 @@ Some additional ones are the cd, ls, cat, whereis, and ps commands.
 to run this program, use git clone to create a local repo of the program on your computer, then open in 
 the integrated terminal and compile through "gcc techshell.c -o <executable>", and then run with ./<executable>.
 
-At the moment, I have not found any required that do not work fully. However, the pipe character '|' does not work, which is able to make an output of a command
-become an input for another; nor does it work with ';' to execute multiple commands at once. 
-Additionnally, the appending token '>>' doesn't work with our program just being able to truncate output with '>'
+I did find that I do not know exactly how to output the correct error message when incorrectly using certain commands. For example, I do not know how to correctly output the terminal 
+error message when using standard input and output the wrong way. However, I was able to find a way for an error message to pop up. Besides that, I have not found any required that do not 
+work fully. However, the pipe character '|' does not work, which is able to make an output of a command become an input for another; nor does it work with ';' to execute multiple commands at
+once. Additionnally, the appending token '>>' doesn't work with our program just being able to truncate output with '>'
