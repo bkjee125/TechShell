@@ -89,7 +89,6 @@ char* getInput(){
     } 
     
     input[strcspn(input, "\n")] = '\0'; // removes newline character from input
-    free(input); // frees the memory
     return input; 
 }
 
@@ -276,10 +275,14 @@ int main() // MAIN
 	    
 	    // execute the command
 	    executeCommand(command);
+
+    	free(input); // frees the memory
+		
 	}
 
 	exit(0);
 }
+
 
 
 
