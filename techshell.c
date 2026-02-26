@@ -64,7 +64,7 @@ void displayPrompt(){
             found and if the home directory is the same as the current working directory. */
             printf("$ ");
             return; 
-        } else { // does not have return in case there was an error
+        } else { 
             char *lastDirectory = basename(cwd); // basename used to get the last directory in the path
             printf("%s$ ", lastDirectory);
             return;
@@ -280,5 +280,6 @@ int main() // MAIN
 
 	exit(0);
 }
+
 
 
